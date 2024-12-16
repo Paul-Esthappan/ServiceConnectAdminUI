@@ -6,14 +6,12 @@ import { categoryListGet } from '../../../../service/api/admin/GetApi'
 const CategoryCount = () => {
 
   const [categoriesTotal,setCategoriesTotal] = useState('')
-  const [subcategoriesTotal,setSubCategoriesTotal] = useState('')
-  const [refresh, setRefresh] = useState(false);
+  const [subcategoriesTotal,setSubCategoriesTotal] = useState('');
 
   useEffect(() => {
     const fetchCategories = async () => {
         try {
             const response = await categoryListGet(); // Wait for the promise to resolve
-            setRefresh(prev=> !prev)
             setCategoriesTotal(response.total_categories || []); 
             setSubCategoriesTotal(response.total_subcategories || [])
            
@@ -23,7 +21,7 @@ const CategoryCount = () => {
     };
 
     fetchCategories();
-}, [refresh]);
+}, []);
 
   return (
     <div className="flex flex-col justify-center items-center lg:justify-normal md:justify-normal xl:justify-normal  lg:flex-row md:flex-row xl:flex-row gap-10 mb-8">
